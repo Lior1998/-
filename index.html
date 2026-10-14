@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>יסודות הניהול - מאגר תרגול וכרטיסיות סיכום</title>
+    <title>יסודות הניהול - מאגר שאלות וכרטיסיות סיכום לבחינה</title>
     <style>
         :root {
             --primary: #1e3a8a;
-            --primary-light: #3b82f6;
+            --primary-light: #2563eb;
             --secondary: #0d9488;
-            --accent: #f59e0b;
+            --accent: #d97706;
             --bg: #f8fafc;
             --surface: #ffffff;
-            --text: #1e293b;
+            --text: #0f172a;
             --text-muted: #64748b;
-            --border: #e2e8f0;
+            --border: #cbd5e1;
             --correct-bg: #dcfce7;
-            --correct-border: #22c55e;
-            --correct-text: #15803d;
+            --correct-border: #16a34a;
+            --correct-text: #14532d;
             --wrong-bg: #fee2e2;
-            --wrong-border: #ef4444;
-            --wrong-text: #b91c1c;
+            --wrong-border: #dc2626;
+            --wrong-text: #7f1d1d;
             --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
         }
 
@@ -38,50 +38,51 @@
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, #1d4ed8 100%);
             color: white;
-            padding: 2.5rem 1rem;
+            padding: 2.2rem 1rem;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
         header h1 {
-            font-size: 2.2rem;
+            font-size: 2.3rem;
             margin-bottom: 0.5rem;
         }
 
         header p {
             font-size: 1.1rem;
-            opacity: 0.9;
+            opacity: 0.95;
         }
 
         .nav-tabs {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.2rem;
             background: var(--surface);
             padding: 1rem;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         .tab-btn {
-            background: none;
+            background: white;
             border: 2px solid var(--primary-light);
             color: var(--primary-light);
-            padding: 0.6rem 2rem;
-            font-size: 1.05rem;
-            font-weight: bold;
+            padding: 0.7rem 2.2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
             border-radius: 9999px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.25s ease;
         }
 
         .tab-btn.active, .tab-btn:hover {
             background-color: var(--primary-light);
             color: white;
+            box-shadow: 0 2px 6px rgba(37,99,235,0.3);
         }
 
         main {
@@ -96,26 +97,26 @@
 
         .tab-content.active {
             display: block;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.25s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
+            from { opacity: 0; transform: translateY(4px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* סגנון כרטיסיות סיכום */
+        /* סגנון כרטיסיות סיכום מורחבות */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.6rem;
             margin-bottom: 2rem;
         }
 
         .flashcard {
             background: var(--surface);
-            border-radius: 12px;
-            padding: 1.5rem;
+            border-radius: 14px;
+            padding: 1.6rem;
             box-shadow: var(--shadow);
             border-right: 6px solid var(--primary-light);
             display: flex;
@@ -136,22 +137,24 @@
         }
 
         .flashcard-tag {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             background: #eff6ff;
             color: var(--primary);
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
+            padding: 0.2rem 0.7rem;
+            border-radius: 6px;
             font-weight: bold;
         }
 
         .flashcard h3 {
             color: var(--primary);
-            font-size: 1.25rem;
+            font-size: 1.3rem;
+            margin-bottom: 0.6rem;
         }
 
         .flashcard-body {
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
+            font-size: 0.96rem;
+            margin-bottom: 1.2rem;
+            color: #334155;
         }
 
         .flashcard-body ul {
@@ -160,52 +163,52 @@
         }
 
         .flashcard-body li {
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.45rem;
         }
 
-        .exam-tip-badge {
+        .exam-prep-box {
             background: #fffbeb;
             border: 1px solid #fde68a;
             color: #92400e;
-            padding: 0.5rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
+            padding: 0.7rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
             font-weight: 500;
         }
 
         .visual-diagram-card {
             grid-column: 1 / -1;
             background: var(--surface);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 1.8rem;
             box-shadow: var(--shadow);
-            margin-bottom: 1.5rem;
-            border-top: 4px solid var(--primary);
+            margin-bottom: 1.8rem;
+            border-top: 5px solid var(--primary);
         }
 
-        /* סגנון מבחן */
+        /* סגנון מבחן ותרגול */
         .exam-bar {
             background: var(--surface);
-            padding: 1rem 1.5rem;
+            padding: 1.2rem 1.6rem;
             border-radius: 12px;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
             box-shadow: var(--shadow);
-            margin-bottom: 2rem;
+            margin-bottom: 1.8rem;
             gap: 1rem;
         }
 
         .filters {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.6rem;
             align-items: center;
         }
 
         select, .btn-action {
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
             border: 1px solid var(--border);
             font-size: 0.95rem;
             outline: none;
@@ -226,11 +229,11 @@
 
         .score-pill {
             background: #f1f5f9;
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 9999px;
             font-weight: bold;
             color: var(--primary);
-            font-size: 1.1rem;
+            font-size: 1.15rem;
         }
 
         .q-card {
@@ -245,36 +248,38 @@
         .q-meta {
             display: flex;
             justify-content: space-between;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
             margin-bottom: 0.8rem;
         }
 
         .q-title {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 1.2rem;
+            color: var(--text);
         }
 
         .options-group {
             display: flex;
             flex-direction: column;
-            gap: 0.6rem;
+            gap: 0.7rem;
         }
 
         .opt-btn {
             text-align: right;
-            padding: 0.8rem 1.2rem;
+            padding: 0.85rem 1.2rem;
             border-radius: 8px;
             border: 1px solid var(--border);
             background: #f8fafc;
             cursor: pointer;
             font-size: 1rem;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
         .opt-btn:hover:not(.locked) {
             background: #e2e8f0;
+            border-color: #94a3b8;
         }
 
         .opt-btn.correct {
@@ -293,10 +298,10 @@
         .feedback-panel {
             display: none;
             margin-top: 1.2rem;
-            padding: 1rem;
+            padding: 1.2rem;
             border-radius: 8px;
             background: #f8fafc;
-            border-right: 4px solid var(--primary-light);
+            border-right: 5px solid var(--primary-light);
         }
 
         .feedback-panel.correct { border-right-color: var(--correct-border); }
@@ -305,175 +310,42 @@
         .understanding-q {
             margin-top: 0.8rem;
             padding-top: 0.8rem;
-            border-top: 1px dashed var(--border);
+            border-top: 1px dashed #cbd5e1;
             color: #0369a1;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
         }
 
         .pagination {
             display: flex;
             justify-content: center;
-            gap: 0.5rem;
-            margin: 2rem 0;
+            gap: 0.4rem;
+            margin: 2.2rem 0;
+            flex-wrap: wrap;
         }
 
         .page-btn {
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.9rem;
             border: 1px solid var(--border);
             background: white;
             border-radius: 6px;
             cursor: pointer;
+            font-weight: 500;
         }
 
         .page-btn.active {
             background: var(--primary-light);
             color: white;
             font-weight: bold;
+            border-color: var(--primary-light);
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>פורטל ההכנה לבחינה – יסודות הניהול</h1>
-    <p>כרטיסיות סיכום מקיפות על כל המצגות (1.2 עד 5.7) ומאגר תרגול מקיף (100 שאלות)</p>
+    <h1>יסודות הניהול – פורטל הסיכומים ומאגר הבחינה</h1>
+    <p>כרטיסיות סיכום מעמיקות (1.2 עד 5.7) ומאגר 100 שאלות מלא עם מחוון בדיקה אקדמי</p>
 </header>
 
 <div class="nav-tabs">
-    <button class="tab-btn active" onclick="showTab('study-tab')">כרטיסיות סיכום לפי מצגות</button>
-    <button class="tab-btn" onclick="showTab('exam-tab')">מאגר 100 שאלות למבחן</button>
-</div>
-
-<main>
-    <!-- לשונית כרטיסיות סיכום -->
-    <section id="study-tab" class="tab-content active">
-
-        <!-- תרשים ויזואלי 1: המערכת הפתוחה -->
-        <div class="visual-diagram-card">
-            <h3>דיאגרמת ליבה: מודל המערכת הפתוחה (כץ וקאהן) [מצגות 1.4, 1.7]</h3>
-            <div style="text-align: center; margin-top: 1rem;">
-                <svg viewBox="0 0 750 140" style="max-width: 100%; height: auto;">
-                    <!-- תשומות -->
-                    <rect x="20" y="30" width="180" height="70" rx="10" fill="#e0f2fe" stroke="#38bdf8" stroke-width="2"/>
-                    <text x="110" y="58" font-weight="bold" fill="#0369a1" text-anchor="middle">תשומות (Inputs)</text>
-                    <text x="110" y="80" font-size="12" fill="#0c4a6e" text-anchor="middle">עובדים, כסף, חומרי גלם, ידע</text>
-                    
-                    <line x1="200" y1="65" x2="270" y2="65" stroke="#64748b" stroke-width="2"/>
-                    <polygon points="270,60 280,65 270,70" fill="#64748b"/>
-
-                    <!-- המרה -->
-                    <rect x="285" y="30" width="180" height="70" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
-                    <text x="375" y="58" font-weight="bold" fill="#b45309" text-anchor="middle">תהליך המרה</text>
-                    <text x="375" y="80" font-size="12" fill="#78350f" text-anchor="middle">ייצור, הוראה, שירות, תפעול</text>
-
-                    <line x1="465" y1="65" x2="535" y2="65" stroke="#64748b" stroke-width="2"/>
-                    <polygon points="535,60 545,65 535,70" fill="#64748b"/>
-
-                    <!-- תפוקות -->
-                    <rect x="550" y="30" width="180" height="70" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
-                    <text x="640" y="58" font-weight="bold" fill="#15803d" text-anchor="middle">תפוקות (Outputs)</text>
-                    <text x="640" y="80" font-size="12" fill="#14532d" text-anchor="middle">בוגרים, מוצרים, רווח, שירות</text>
-
-                    <!-- משוב -->
-                    <path d="M 640 100 L 640 125 L 110 125 L 110 100" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4"/>
-                    <polygon points="105,102 110,95 115,102" fill="#94a3b8"/>
-                    <text x="375" y="135" font-size="11" fill="#64748b" text-anchor="middle">לולאת משוב (Feedback) לתיקון סטיות</text>
-                </svg>
-            </div>
-        </div>
-
-        <div class="cards-grid">
-            <!-- כרטיסיה 1.2 -->
-            <div class="flashcard">
-                <div>
-                    <div class="flashcard-header">
-                        <span class="flashcard-tag">מצגת 1.2</span>
-                        <span>יחידה 1</span>
-                    </div>
-                    <h3>גישות ניהול מסורתיות</h3>
-                    <div class="flashcard-body">
-                        <ul>
-                            <li><strong>ניהול מדעי (טיילור):</strong> מיקוד בעובד הבודד ("אדם כלכלי"), חקר זמנים ותנועה, One Best Way, שכר עידוד לפי תפוקה.</li>
-                            <li><strong>ביורוקרטיה (וובר):</strong> שלטון המשרה, הפרדה בין אדם לתפקיד, נהלים כתובים, היררכיה נוקשה וקידום לפי כישורים.</li>
-                            <li><strong>יחסי אנוש (מאיו):</strong> מחקרי הות'ורן, האדם החברתי, השפעת הקבוצה הלא-פורמלית ותשומת הלב הניהולית על הפריון.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="exam-tip-badge">טיפ למבחן: בטיילור אין "הוגנות סובייקטיבית". בוובר אין "יחס אישי".</div>
-            </div>
-
-            <!-- כרטיסיה 1.4 + 1.7 -->
-            <div class="flashcard secondary">
-                <div>
-                    <div class="flashcard-header">
-                        <span class="flashcard-tag">מצגות 1.4, 1.7</span>
-                        <span>יחידה 1</span>
-                    </div>
-                    <h3>מאפייני המערכת הפתוחה</h3>
-                    <div class="flashcard-body">
-                        <ul>
-                            <li><strong>מחזוריות:</strong> תפוקות נמכרות ומייצרות משאבים לקליטת תשומות חדשות.</li>
-                            <li><strong>אנטרופיה מול אנטרופיה שלילית:</strong> אנטרופיה היא התנוונות טבעית. אנטרופיה שלילית היא יבוא אנרגיה חיצונית לשרידה וצמיחה.</li>
-                            <li><strong>משוב שלילי:</strong> מנגנון מידע המתקן סטיות ומחזיר את הארגון לאיזון (Dynamic Homeostasis).</li>
-                            <li><strong>בידול ושוויון האחרית:</strong> בידול = התמחות ופיצול תפקידים. שוויון האחרית = הגעה לאותה מטרה מדרכים שונות.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="exam-tip-badge">טיפ למבחן: ירידת מניה או ביטול חוזה משקפים אנטרופיה.</div>
-            </div>
-
-            <!-- כרטיסיה 1.9 -->
-            <div class="flashcard accent">
-                <div>
-                    <div class="flashcard-header">
-                        <span class="flashcard-tag">מצגת 1.9</span>
-                        <span>יחידה 1</span>
-                    </div>
-                    <h3>תתי המערכות בארגון (דאפט)</h3>
-                    <div class="flashcard-body">
-                        <ul>
-                            <li><strong>ייצור/הפקה:</strong> ליבת הארגון – המרת תשומות לתפוקות.</li>
-                            <li><strong>אחזקה:</strong> תמיכה שוטפת – שימור עובדים, שכר, תחזוקת ציוד ומבנים.</li>
-                            <li><strong>חליפין (כניסה ויציאה):</strong> קשרי גבול – רכש (תשומות) ושיווק/הפצה (תפוקות).</li>
-                            <li><strong>הסתגלות:</strong> בחינת הסביבה – מו"פ (R&D), חדשנות, תכנון עתידי ומודיעין עסקי.</li>
-                            <li><strong>ניהול:</strong> תיאום, בקרה והתוויית אסטרטגיה בין כל תתי-המערכות.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="exam-tip-badge">טיפ למבחן: פיתוח מוצר עתידי = הסתגלות; מחסור במורים = פגיעה בתשומות הניהול.</div>
-            </div>
-
-            <!-- כרטיסיה 2.3, 2.5, 2.7, 2.9 -->
-            <div class="flashcard">
-                <div>
-                    <div class="flashcard-header">
-                        <span class="flashcard-tag">מצגות 2.3 - 2.9</span>
-                        <span>יחידה 2</span>
-                    </div>
-                    <h3>גישות ניהול מודרניות</h3>
-                    <div class="flashcard-body">
-                        <ul>
-                            <li><strong>TQM (איכות כוללת):</strong> מיקוד בלקוח (פנימי וחיצוני), שיפור מתמיד (Kaizen), אפס תקלות, טווח ארוך.</li>
-                            <li><strong>TOC (תורת האילוצים):</strong> זיהוי צוואר הבקבוק (האילוץ) המגביל את כל המערכת, ניצולו המרבי והרחבתו.</li>
-                            <li><strong>Lean (ניהול רזה):</strong> סילוק מוחלט של בזבוז (Muda) שאינו מייצר ערך ללקוח, ייצור Just-In-Time.</li>
-                            <li><strong>Agile (אג'ייל):</strong> גמישות מקסימלית, עבודה בספרינטים ומחזורים קצרים, התאמה מהירה לתנאי אי-ודאות.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="exam-tip-badge">טיפ למבחן: תוצר שהלקוח לא צריך = בזבוז שיש למגר לפי ניהול רזה.</div>
-            </div>
-
-            <!-- כרטיסיה 3.2 + 3.3 -->
-            <div class="flashcard secondary">
-                <div>
-                    <div class="flashcard-header">
-                        <span class="flashcard-tag">מצגות 3.2, 3.3</span>
-                        <span>יחידה 3</span>
-                    </div>
-                    <h3>חזון, מטרות, יעילות ואפקטיביות</h3>
-                    <div class="flashcard-body">
-                        <ul>
-                            <li><strong>חזון:</strong> הסיבות לקיום הארגון, מנוסח לעתיד, מעניק השראה.</li>
-                            <li><strong>מטרות רשמיות מול אופרטיביות:</strong> רשמיות מיועדות ללגיטימציה וכוונות כלליות; אופרטיביות הן תוצאות מוגדרות, מדידות ומכוונות ביצוע בפועל.</li>
-                            <li><strong>אפקטיביות:</strong> השגת המטרות ("לעשות את הדבר הנכון").</li>
-                            <li><strong>יעילות:</strong> יחס בין משאבים לתפוקות – חיסכון בעלויות ("לע
+    <button id="btn
