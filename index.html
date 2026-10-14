@@ -188,3 +188,466 @@
             border-radius: 12px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+
+        .q-badge {
+            background-color: #e2e8f0;
+            color: var(--text-muted);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .q-topic {
+            background-color: #feebc8;
+            color: #7b341e;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .question-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: var(--text);
+        }
+
+        .options-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .option-item {
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .option-item:hover {
+            background-color: #ebf8ff;
+            border-color: var(--primary-light);
+        }
+
+        .option-item.selected {
+            background-color: #bee3f8;
+            border-color: var(--primary-light);
+            font-weight: bold;
+        }
+
+        .option-item.correct {
+            background-color: #c6f6d5 !important;
+            border-color: var(--success) !important;
+            color: #22543d;
+        }
+
+        .option-item.wrong {
+            background-color: #fed7d7 !important;
+            border-color: var(--error) !important;
+            color: #742a2a;
+        }
+
+        .explanation-box {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f7fafc;
+            border-right: 4px solid var(--primary-light);
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .elimination-tip {
+            margin-top: 0.5rem;
+            color: #b7791f;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>יסודות הניהול – פורטל תרגול והכנה לבחינה</h1>
+    <p>הכנה ממוקדת על פי חומרי הקורס, שקפי המצגות ודרכי התמודדות עם אי-ודאות (עד 5.7)</p>
+</header>
+
+<div class="nav-container">
+    <button class="tab-btn active" onclick="switchTab('exam-tab')">תרגול שאלות משתנות</button>
+    <button class="tab-btn" onclick="switchTab('summary-tab')">סיכום חזותי וארגז כלים</button>
+</div>
+
+<main>
+    <!-- לשונית 1: מערכת תרגול שאלות -->
+    <section id="exam-tab" class="tab-content active">
+        <div class="exam-header">
+            <div>
+                <span class="score-box">ציון: <span id="current-score">0</span> / <span id="total-questions">10</span></span>
+            </div>
+            <button class="action-btn" onclick="generateNewExam()">ערבב ויצר מבחן חדש</button>
+        </div>
+
+        <div id="questions-container">
+            <!-- שאלות נטענות באופן דינמי דרך JS -->
+        </div>
+    </section>
+
+    <!-- לשונית 2: עמוד סיכומים חזותי ותרשימים -->
+    <section id="summary-tab" class="tab-content">
+        
+        <div class="summary-card">
+            <h2>מטריצת קבלת החלטות בארגונים – אינטגרציה (נושא 5)</h2>
+            <p>הבחירה במודל הניהולי תלויה בשני ממדי הסכמה: על הבעיות ועל הפתרונות.</p>
+            
+            <div class="visual-box">
+                <svg viewBox="0 0 500 260" style="max-width: 100%; height: auto;">
+                    <rect x="10" y="10" width="480" height="240" fill="#f8fafc" stroke="#cbd5e0" rx="8"/>
+                    <line x1="250" y1="10" x2="250" y2="250" stroke="#a0aec0" stroke-width="2"/>
+                    <line x1="10" y1="130" x2="490" y2="130" stroke="#a0aec0" stroke-width="2"/>
+                    
+                    <!-- תוויות צירים -->
+                    <text x="370" y="30" font-weight="bold" fill="#2d3748" text-anchor="middle">הסכמה על פתרונות</text>
+                    <text x="130" y="30" font-weight="bold" fill="#2d3748" text-anchor="middle">אי-הסכמה על פתרונות</text>
+                    <text x="470" y="80" font-weight="bold" fill="#2d3748" text-anchor="end">הסכמה על בעיות</text>
+                    <text x="470" y="195" font-weight="bold" fill="#2d3748" text-anchor="end">אי-הסכמה בעיות</text>
+                    
+                    <!-- רביע 1 -->
+                    <rect x="260" y="45" width="220" height="75" fill="#ebf8ff" rx="6"/>
+                    <text x="370" y="75" font-weight="bold" fill="#2b6cb0" text-anchor="middle">מודל ניתוח מערכות (רציונלי)</text>
+                    <text x="370" y="100" font-size="12" fill="#4a5568" text-anchor="middle">פעולות טכניות, נהלים ואוטומציה</text>
+                    
+                    <!-- רביע 2 -->
+                    <rect x="20" y="45" width="220" height="75" fill="#fefcbf" rx="6"/>
+                    <text x="130" y="75" font-weight="bold" fill="#b7791f" text-anchor="middle">מודל ההתוויה (תוספתי)</text>
+                    <text x="130" y="100" font-size="12" fill="#4a5568" text-anchor="middle">משקל לעיצוב פתרון, ניסוי וטעייה</text>
+                    
+                    <!-- רביע 3 -->
+                    <rect x="260" y="145" width="220" height="95" fill="#feebc8" rx="6"/>
+                    <text x="370" y="180" font-weight="bold" fill="#c05621" text-anchor="middle">מודל קרנגי (פוליטי)</text>
+                    <text x="370" y="205" font-size="12" fill="#4a5568" text-anchor="middle">משקל לזיהוי בעיות, קואליציות ומיקוח</text>
+                    
+                    <!-- רביע 4 -->
+                    <rect x="20" y="145" width="220" height="95" fill="#fed7d7" rx="6"/>
+                    <text x="130" y="180" font-weight="bold" fill="#9b2c2c" text-anchor="middle">מודל פח האשפה</text>
+                    <text x="130" y="205" font-size="12" fill="#4a5568" text-anchor="middle">אנרכיה מאורגנת, הצטלבות מקרית</text>
+                </svg>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <h2>שלוש דרכי ההתמודדות עם אי-ודאות סביבתית (מצגות 5.3, 5.5, 5.7)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>גישה</th>
+                        <th>כיוון הפעולה</th>
+                        <th>עקרון מרכזי</th>
+                        <th>כלים מרכזיים מהמצגות</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>התמודדות א' (5.3)</strong></td>
+                        <td>פנימה לארגון</td>
+                        <td>התאמת המבנה, המחלקות והתהליכים</td>
+                        <td>ריבוי מחלקות, מו"פ לסריקת סביבה, מעבר ממכניסטי לאורגני</td>
+                    </tr>
+                    <tr>
+                        <td><strong>התמודדות ב' (5.5)</strong></td>
+                        <td>ממשק הדדי</td>
+                        <td>יצירת קשרים, שותפויות ושליטה בארגונים</td>
+                        <td>מיזוג אופקי/אנכי, מיזם משותף (JV), קואופטציה בדירקטוריון</td>
+                    </tr>
+                    <tr>
+                        <td><strong>התמודדות ג' (5.7)</strong></td>
+                        <td>החוצה על הסביבה</td>
+                        <td>השפעה ושינוי יזום של הסביבה</td>
+                        <td>לובינג ושתדלנות פוליטית, פרסום ושיווק אגרסיבי, תרומה לקהילה</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="summary-card">
+            <h2>מדידת אפקטיביות ארגונית (יחידה 3)</h2>
+            <div class="visual-box">
+                <svg viewBox="0 0 600 120" style="max-width: 100%; height: auto;">
+                    <!-- תשומות -->
+                    <rect x="10" y="30" width="160" height="60" rx="8" fill="#e2e8f0" stroke="#a0aec0"/>
+                    <text x="90" y="55" font-weight="bold" text-anchor="middle">תשומות (Inputs)</text>
+                    <text x="90" y="75" font-size="11" text-anchor="middle">גישת משאבי המערכת</text>
+                    
+                    <line x1="170" y1="60" x2="210" y2="60" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
+                    
+                    <!-- המרה -->
+                    <rect x="220" y="30" width="160" height="60" rx="8" fill="#ebf8ff" stroke="#63b3ed"/>
+                    <text x="300" y="55" font-weight="bold" text-anchor="middle">תהליך המרה</text>
+                    <text x="300" y="75" font-size="11" text-anchor="middle">גישת התהליכים הפנימיים</text>
+                    
+                    <line x1="380" y1="60" x2="420" y2="60" stroke="#718096" stroke-width="2"/>
+                    
+                    <!-- תפוקות -->
+                    <rect x="430" y="30" width="160" height="60" rx="8" fill="#c6f6d5" stroke="#68d391"/>
+                    <text x="510" y="55" font-weight="bold" text-anchor="middle">תפוקות (Outputs)</text>
+                    <text x="510" y="75" font-size="11" text-anchor="middle">גישת המטרות</text>
+                </svg>
+            </div>
+            <p><strong>גישת בעלי העניין (Stakeholders):</strong> מקיפה את כל שלושת השלבים ובוחנת איזון ושביעות רצון של כלל הגורמים (עובדים, בעלים, לקוחות, ספקים, ממשלה, קהילה).</p>
+        </div>
+
+        <div class="summary-card">
+            <h2>ארגז כלים: איך לפסול מסיחים במבחן?</h2>
+            <ul>
+                <li><strong>כלל קיצון:</strong> תשובות המכילות "תמיד", "אך ורק", "ללא יוצא מן הכלל" הן לרוב שגויות.</li>
+                <li><strong>יעילות מול אפקטיביות:</strong> אם שואלים האם עמדו במטרה $\leftarrow$ התשובה היא אפקטיביות! אל תבחר "יעיל" אלא אם הוצגו במפורש נתוני עלויות ומשאבים.</li>
+                <li><strong>טיילור ו-וובר:</strong> כל תשובה בגישות אלו המזכירה "אווירה משפחתית", "רגשות" או "הוגנות סובייקטיבית" נפסלת מיידית.</li>
+            </ul>
+        </div>
+    </section>
+</main>
+
+<script>
+    // מאגר עשיר של שאלות ברמת בחינה (נושאים 1 עד 5 כולל התמודדות עם אי-ודאות)
+    const questionBank = [
+        {
+            topic: "נושא 5 - קבלת החלטות",
+            question: "מנהלי מחלקות בארגון אינם מסכימים ביניהם מהי הבעיה הדחופה ביותר שיש לפתור (שיווק טוענת לנטישת לקוחות, תפעול טוענת לבלאי מכונות), אך מסכימים על שיטת פתרון מסוימת. לפי מטריצת קבלת החלטות, באיזה מודל מדובר?",
+            options: [
+                "מודל ניתוח מערכות (הרציונלי)",
+                "מודל ההתוויה (התוספתי)",
+                "מודל קרנגי (הקואליציוני/פוליטי)",
+                "מודל פח האשפה"
+            ],
+            correct: 2,
+            explanation: "כאשר קיימת אי-הסכמה על הבעיות והסכמה על הפתרונות, המודל המתאים הוא מודל קרנגי. נדרש משא ומתן ובניית קואליציה כדי להכריע על סדר העדיפויות.",
+            eliminationTip: "זיהית חוסר הסכמה על בעיות? פסול מיד את הרציונלי ואת ההתוויה שמניחים הסכמה על הבעיה."
+        },
+        {
+            topic: "נושא 5 - קבלת החלטות",
+            question: "במצב שבו מנהלים מסכימים לחלוטין על היעד ועל הבעיה, אך אין להם מושג או הסכמה כיצד לפתור אותה, מהו המודל המתאים ומהו הדגש הניהולי שלו?",
+            options: [
+                "מודל פח האשפה - פעולה אקראית מתוך אנרכיה",
+                "מודל קרנגי - בניית קואליציה לצורך השגת רוב",
+                "מודל ההתוויה - מתן משקל לעיצוב הפתרונות והתקדמות בצעדים קטנים תוך ניסוי וטעייה",
+                "מודל ניתוח מערכות - הפעלת אלגוריתמים טכניים אוטומטיים"
+            ],
+            correct: 2,
+            explanation: "הסכמה על בעיות + אי-הסכמה על פתרונות = מודל ההתוויה (Incremental). מתקדמים בצעדים זהירים ולומדים מהשטח.",
+            eliminationTip: "אין הסכמה על הפתרון? לא ניתן להשתמש בניתוח מערכות טכני כי הפתרון לא ידוע."
+        },
+        {
+            topic: "מצגת 5.3 - התמודדות א'",
+            question: "בעקבות חדירת טכנולוגיות AI חדשות וסביבה לא יציבה, חברת פיננסים החליטה להקים אגף חדשנות ייעודי ולהעביר סמכויות החלטה לצוותים בשטח. מהלך זה משקף:",
+            options: [
+                "התמודדות מסוג ג' - שינוי הסביבה החיצונית",
+                "התמודדות מסוג א' - התאמת המבנה הפנימי (גידול במורכבות ומעבר למאפיינים אורגניים)",
+                "התמודדות מסוג ב' - קואופטציה",
+                "קבלת החלטות לפי מודל פח האשפה"
+            ],
+            correct: 1,
+            explanation: "שינוי המבנה הפנימי, הקמת מחלקה לסריקת הסביבה וביזור סמכויות (מבנה אורגני) הם המאפיינים המובהקים של התמודדות א' (5.3).",
+            eliminationTip: "החברה שינתה את עצמה מבפנים ולא קנתה חברה אחרת (פוסל ב') ולא עשתה לובינג (פוסל ג')."
+        },
+        {
+            topic: "מצגת 5.5 - התמודדות ב'",
+            question: "רשת סופרמרקטים גדולה החליטה לרכוש את אחד מספקי הירקות הגדולים שלה כדי למנוע מחסור בעונות מעבר. פעולה זו מהווה:",
+            options: [
+                "מיזוג אופקי",
+                "מיזוג מתפרס",
+                "מיזוג אנכי",
+                "קואופטציה"
+            ],
+            correct: 2,
+            explanation: "מיזוג אנכי הוא מיזוג לאורך שרשרת הערך (רכישת ספק או מפיץ) במטרה להבטיח שליטה במשאבים.",
+            eliminationTip: "מיזוג אופקי זה קניית סופרמרקט מתחרה; רכישת ספק היא תמיד אנכית (קדימה או אחורה)."
+        },
+        {
+            topic: "מצגת 5.7 - התמודדות ג'",
+            question: "איגוד יבואני התרופות פועל מול ועדת הבריאות בכנסת כדי להאריך את תקופת הפטנט הבלעדי על תרופות מקור. איזו דרך התמודדות מיושמת כאן?",
+            options: [
+                "התאמת המבנה הארגוני (התמודדות א')",
+                "מיזם משותף (התמודדות ב')",
+                "השפעה יזומה על הסביבה באמצעות פעילות פוליטית/לובינג (התמודדות ג')",
+                "החזרת שיווי משקל דינמי במערכת סגורה"
+            ],
+            correct: 2,
+            explanation: "לובינג ופעילות מול מחוקקים הם פעולות שמטרתן לכפות או לעצב את הסביבה החיצונית שתתאים לארגון (התמודדות ג' - 5.7).",
+            eliminationTip: "לובינג וחקיקה פועלים החוצה על המדינה, לא על מבנה החברה פנימה."
+        },
+        {
+            topic: "נושא 3 - אפקטיביות",
+            question: "מנהל חברת תרופות הצליח לפתח חיסון מציל חיים תוך חריגה של 40% מהתקציב שתוכנן. כיצד נגדיר את פעילותו לפי המושגים המדויקים?",
+            options: [
+                "יעיל אך לא אפקטיבי",
+                "אפקטיבי אך לא יעיל",
+                "גם אפקטיבי וגם יעיל",
+                "פרודוקטיבי בלבד"
+            ],
+            correct: 1,
+            explanation: "השגת היעד שהוצב (פיתוח החיסון) מבטאת אפקטיביות ('לעשות את הדבר הנכון'). חריגה מעלויות ובזבוז משאבים מעידים על חוסר יעילות.",
+            eliminationTip: "עמד במטרה = אפקטיבי! בזבז כסף = לא יעיל."
+        },
+        {
+            topic: "נושא 3 - אפקטיביות",
+            question: "עמותה לחלוקת מזון נמדדת על פי סך התרומות והכספים שהצליחה לגייס מהציבור ומהמגזר העסקי. לפי איזו גישה נמדדת האפקטיביות שלה?",
+            options: [
+                "גישת המטרות (תפוקות)",
+                "גישת התהליכים הפנימיים",
+                "גישת משאבי המערכת (תשומות)",
+                "גישת השיווק המדעי"
+            ],
+            correct: 2,
+            explanation: "גישת משאבי המערכת בוחנת את היכולת להשיג משאבים (תשומות) מהסביבה. בעמותות וסטארט-אפים גיוס כספים הוא מדד האפקטיביות המרכזי.",
+            eliminationTip: "תרומות הן כסף שנכנס פנימה לארגון = תשומות = משאבי מערכת."
+        },
+        {
+            topic: "נושא 2 - גישות ניהול",
+            question: "מנהל מפעל החליט לבצע צילום וידאו של תנועות הפועלים כדי לבטל תנועות מיותרות ולקבוע תקן זמן אחיד ומדויק לכל פעולה. באיזו גישה הוא נוקט?",
+            options: [
+                "הניהול המדעי של טיילור (חקר זמנים ותנועה)",
+                "גישת יחסי אנוש של מאיו",
+                "המודל הבירוקרטי של וובר",
+                "ניהול רזה (Lean)"
+            ],
+            correct: 0,
+            explanation: "חקר זמנים ותנועה, סטנדרטיזציה ומציאת 'The One Best Way' הם עמודי התווך של הניהול המדעי של פרדריק טיילור.",
+            eliminationTip: "מדידת זמנים בשעון עצר ותנועות עובד = טיילור."
+        },
+        {
+            topic: "נושא 3 - מאפייני מערכת פתוחה",
+            question: "במפעל מזון גילו תקלה באריזות בעקבות תלונות שהגיעו ממוקד שירות הלקוחות, ובעקבות זאת עצרו את פס הייצור ותיקנו את המכונה. זהו ביטוי ל:",
+            options: [
+                "אנטרופיה מוחלטת",
+                "משוב שלילי (Negative Feedback) המחזיר את המערכת לאיזון",
+                "שוויון האחרית",
+                "בידול מבני"
+            ],
+            correct: 1,
+            explanation: "משוב שלילי הוא מידע על סטייה או תקלה מהסביבה המאפשר לארגון לתקן את עצמו ולשמור על שיווי משקל תקין.",
+            eliminationTip: "משוב 'שלילי' בתיאוריה מערכתית הוא דבר חיובי – הוא מתקן סטיות ומאזן!"
+        },
+        {
+            topic: "נושא 5 - מודל דנקן",
+            question: "ארגון הפועל בענף שבו יש לקוחות מגוונים ושונים זה מזה (מורכב), אך דפוסי הצריכה שלהם אינם משתנים לאורך שנים (יציב). מהי רמת אי-הוודאות?",
+            options: [
+                "נמוכה",
+                "בינונית-נמוכה",
+                "בינונית-גבוהה",
+                "גבוהה"
+            ],
+            correct: 1,
+            explanation: "מורכב + יציב = רמת אי-ודאות בינונית-נמוכה לפי מודל דנקן.",
+            eliminationTip: "יציב תמיד מוריד את דרגת הסיכון. שילוב של יציב עם מורכב נותן בינוני-נמוך."
+        }
+    ];
+
+    let currentQuestions = [];
+    let userAnswers = {};
+
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+        event.target.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+    }
+
+    // ערבוב ובחירת שאלות
+    function generateNewExam() {
+        userAnswers = {};
+        document.getElementById('current-score').innerText = '0';
+        
+        // ערבוב השאלות ובחירת 10
+        currentQuestions = [...questionBank].sort(() => 0.5 - Math.random()).slice(0, 10);
+        document.getElementById('total-questions').innerText = currentQuestions.length;
+
+        const container = document.getElementById('questions-container');
+        container.innerHTML = '';
+
+        currentQuestions.forEach((q, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.id = `q-card-${index}`;
+
+            let optionsHtml = '';
+            q.options.forEach((opt, optIndex) => {
+                optionsHtml += `
+                    <li class="option-item" onclick="selectAnswer(${index}, ${optIndex})">
+                        <span>(${optIndex + 1})</span>
+                        <span>${opt}</span>
+                    </li>
+                `;
+            });
+
+            card.innerHTML = `
+                <div class="question-header">
+                    <span class="q-badge">שאלה ${index + 1}</span>
+                    <span class="q-topic">${q.topic}</span>
+                </div>
+                <div class="question-title">${q.question}</div>
+                <ul class="options-list" id="options-${index}">
+                    ${optionsHtml}
+                </ul>
+                <div class="explanation-box" id="exp-${index}">
+                    <strong>הסבר אקדמי:</strong> ${q.explanation}
+                    <div class="elimination-tip"><strong>טיפ לפסילה:</strong> ${q.eliminationTip}</div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function selectAnswer(qIndex, optIndex) {
+        if (userAnswers[qIndex] !== undefined) return; // לא ניתן לשנות לאחר בדיקה
+
+        userAnswers[qIndex] = optIndex;
+        const qData = currentQuestions[qIndex];
+        const optionsList = document.querySelectorAll(`#options-${qIndex} .option-item`);
+        const expBox = document.getElementById(`exp-${qIndex}`);
+
+        optionsList.forEach((item, i) => {
+            if (i === qData.correct) {
+                item.classList.add('correct');
+            }
+            if (i === optIndex && optIndex !== qData.correct) {
+                item.classList.add('wrong');
+            }
+        });
+
+        expBox.style.display = 'block';
+
+        // עדכון ציון
+        updateScore();
+    }
+
+    function updateScore() {
+        let score = 0;
+        for (let qIdx in userAnswers) {
+            if (userAnswers[qIdx] === currentQuestions[qIdx].correct) {
+                score++;
+            }
+        }
+        document.getElementById('current-score').innerText = score;
+    }
+
+    // הפעלה ראשונית
+    window.onload = generateNewExam;
+</script>
+
+</body>
+</html>
